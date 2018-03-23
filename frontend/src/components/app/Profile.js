@@ -19,7 +19,6 @@ class Profile extends React.Component {
 		this.getUser()
 		this.getFollowers()
 		this.getFollowing()
-		this.checkIfFollowed()
 	}
 
 	getUserPhotos = () => {
@@ -31,6 +30,9 @@ class Profile extends React.Component {
 					photos: res.data.data
 				})
 			})
+			.catch(err => {
+				console.log(err)
+			})
 	}
 
 	getUser = () => {
@@ -41,6 +43,9 @@ class Profile extends React.Component {
 				this.setState({
 					user: res.data.user
 				})
+			})
+			.catch(err => {
+				console.log(err)
 			})
 	}
 
@@ -63,6 +68,9 @@ class Profile extends React.Component {
 					followed: followed
 				})
 			})
+			.catch(err => {
+				console.log(err)
+			})
 	}
 
 	getFollowing = () => {
@@ -74,6 +82,9 @@ class Profile extends React.Component {
 					following: res.data.data
 				})
 			})
+			.catch(err => {
+				console.log(err)
+			})
 	}
 
 	checkReload = () => {
@@ -82,12 +93,33 @@ class Profile extends React.Component {
 			this.getUser()
 			this.getFollowers()
 			this.getFollowing()
-			this.checkIfFollowed()
 		}
 	}
 
-	checkIfFollowed = () => {
-		// console.log(this.state, this.props)
+	handleFollow = () => {
+		axios
+		.post(`/api/${this.props.match.params.username}/follow`)
+		.then( res => {
+			this.setState({
+				followed: true
+			})
+		})
+		.catch(err => {
+				console.log(err)
+		})
+	}
+
+	handleUnfollow = () => {
+		axios
+		.delete(`/api/${this.props.match.params.username}/follow`)
+		.then( res => {
+			this.setState({
+				followed: false
+			})
+		})
+		.catch(err => {
+				console.log(err)
+		})
 	}
 
 	render() {
@@ -95,20 +127,18 @@ class Profile extends React.Component {
 
 		const {photos, user, followers, following, followed} = this.state
 
-		console.log(followed)
-
 		let userPhotos
 		if (photos.length > 0) {
 			userPhotos = photos.map( photo => {
 			return <img key={photo.id} className='user-photo' src={photo.url} alt={photo.caption} width='250px'></img>
 		})
-		} else { userPhotos = <p>This user has no photos yet</p> } 
+		} else { userPhotos = <p>This user has no photos yet. Mlem.</p> } 
 		
 		return(
 			<div>
 				<div className='user-heading'>
 					<h2> {user.username}</h2>
-					<h3> {followed ? ( followed === true ? <Link to='/edit'> Follow Me! </Link> : <Link to='/edit'> Edit Profile </Link> ) : `Following, boop!`} </h3>
+					<h4> {followed ? ( followed === true ? <button onClick={this.handleUnfollow}> Unfollow, Mlem. </button> : <Link to='/edit'> Edit Profile </Link> ) : <button onClick={this.handleFollow}> Follow Me, Boop! </button>} </h4>
 				</div>
 					<div className='user-info'>
 					<img className='user-item user-bio-photo' src={user.profile_pic} alt={user.username} />

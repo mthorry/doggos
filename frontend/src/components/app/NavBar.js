@@ -18,8 +18,8 @@ class NavBar extends Component {
                 type="search"
                 name="search"
                 id="search"
-                placeholder="search"
-                 className="navbar-item"
+                placeholder="doesn't search yet"
+                className="navbar-item"
               />
                 <button className="navbar-item">
                   <Link to={`/profile/${user.username}`}>

@@ -21,7 +21,8 @@ router.delete('/api/:username/photos/:photo_id/likes', loginRequired, db.removeL
 
 
 // Follows
-router.post('/api/:followed_username/addFollower', loginRequired, db.addFollower)
+router.post('/api/:followed_username/follow', loginRequired, db.addFollower)
+router.delete('/api/:followed_username/follow', loginRequired, db.removeFollower)
 router.get('/api/:username/followers/count', db.getFollowersCount)
 router.get('/api/:username/followers', db.getFollowers)
 router.get('/api/:username/following/count', db.getFollowingCount)

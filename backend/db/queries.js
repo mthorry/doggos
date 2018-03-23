@@ -209,6 +209,22 @@ function addFollower(req, res, next) {
     });
 }
 
+function removeFollower(req, res, next) {
+  let follower_username = req.user.username
+  let followed_username = req.params.followed_username 
+  db.result('DELETE FROM follows WHERE follower_username = $1 AND followed_username = $2', [follower_username, followed_username])
+    .then( result => {
+      res.status(200)
+        .json({
+          status: 'success',
+          message: `Removed ${result.rowCount} Follower`
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
 function getFollowersCount(req, res, next) {
   db
     .one("SELECT COUNT(followed_username) FROM follows WHERE followed_username=${username}", {
@@ -218,6 +234,12 @@ function getFollowersCount(req, res, next) {
       res.status(200).json({
         status: 'success',
         followers: data.count
+      });
+    })
+    .catch(err => {
+      res.status(500).json({
+        status: 'Error',
+        err
       });
     });
 }
@@ -254,6 +276,13 @@ function getFollowingCount(req, res, next) {
       res.status(200).json({
         status: 'success',
         following: data.count
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        data: "Error",
+        err
       });
     });
 }
@@ -339,6 +368,13 @@ function getUser(req, res, next) {
     })
     .then(data => {
       res.status(200).json({ user: data });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        data: "Error",
+        err
+      });
     });
 }
 
@@ -349,6 +385,13 @@ function getSingleUser(req, res, next) {
     })
     .then(data => {
       res.status(200).json({ user: data });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        data: "Error",
+        err
+      });
     });
 }
 
@@ -399,5 +442,6 @@ module.exports = {
   editUser: editUser,
   getUserFeed: getUserFeed,
   getAllLikes: getAllLikes,
-  removeLike: removeLike
+  removeLike: removeLike,
+  removeFollower: removeFollower
 };
