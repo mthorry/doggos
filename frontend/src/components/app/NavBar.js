@@ -8,44 +8,36 @@ class NavBar extends Component {
 	render() {
 		const {user, logOut} = this.props
 		return(
-			<div>
-				<h3> Doggos </h3>
-          <div className="header">
-            <div className="left-top">
-              <Link to="/home">
+			<div className="navbar">
+				<h3 className="navbar-item"> Doggos </h3>
+              <Link to="/home" className="navbar-item">
                 <i className="fas fa-camera-retro" />
-                {' '} My Doggos Feed
+                {' '} Show Me Doggos
               </Link>
-            </div>
-            <div className="search-box">
               <input
                 type="search"
                 name="search"
                 id="search"
                 placeholder="search"
+                 className="navbar-item"
               />
-            </div>
-            <div className="right-top">
-              <div className="user-buttons">
-                <button>
+                <button className="navbar-item">
                   <Link to={`/profile/${user.username}`}>
                     <i className="far fa-user fa-2x" />
-                    <p> Profile </p>
+                    <p> My Heckin Profile </p>
                   </Link>
                 </button>
-                <button>
+                <button className="navbar-item">
                   <Link to="/photos/new">
                     <i className="fa fa-plus-square fa-2x" />
-                    <p> New </p>
+                    <p> Do a Post </p>
                   </Link>
                 </button>
-                <button onClick={logOut}>
+                <button onClick={logOut} className="navbar-item">
                     <i className="fas fa-sign-out-alt fa-2x" />
-                    <p> Logout </p>
+                    <p> Do an Exit </p>
                 </button>
-              </div>
-            </div>
-          </div>
+                <hr/>
         </div>
 		)
 	}

@@ -64,26 +64,37 @@ class Profile extends React.Component {
 			})
 	}
 
+	checkReload = () => {
+		if (this.props.match.params.username != this.state.user.username) {
+			this.getUserPhotos()
+			this.getUser()
+			this.getFollowers()
+			this.getFollowing()
+		}
+	}
+
 	render() {
+		this.checkReload()
+
 		const {photos, user, followers, following} = this.state
-		console.log(photos)
+
 		let userPhotos
 		if (photos.length > 0) {
 			userPhotos = photos.map( photo => {
-			return <div className='user-photos' key={photo.id}>
-			<img src={photo.url} alt={photo.caption} width='250px'></img>
-			</div>
+			return <img key={photo.id} className='user-photo' src={photo.url} alt={photo.caption} width='250px'></img>
 		})
 		} else { userPhotos = <p>This user has no photos yet</p> } 
 		
 		return(
 			<div>
 				<h2> {user.username} </h2>
-				<img src={user.profile_pic} alt={user.username} width='150px'/>
-				<p><strong>{followers.length}</strong> followers</p>
-				<p><strong>{following.length}</strong> following</p>
-				<p>{user.bio}</p>
-				{userPhotos}
+					<div className='user-info'>
+					<img className='user-item user-bio-photo' src={user.profile_pic} alt={user.username} />
+					<p className='user-item user-follow'><strong>{followers.length}</strong> heckin {followers.length === 1 ? `follower` : `followers`}</p>
+					<p className='user-item user-follow'>Following <strong>{following.length}</strong> {following.length === 1 ? `good boy` : `good boys and girls`}</p>
+					<p className='user-item user-bio'>{user.bio}</p>
+				</div>
+				<div className='user-photos'>{userPhotos}</div>
 			</div>
 		)
 	}

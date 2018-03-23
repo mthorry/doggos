@@ -2,27 +2,54 @@ html {
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.navbar {
+  flex-wrap: wrap;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.navbar-item {
+  margin: 10px;
 }
 
-.App-title {
-  font-size: 1.5em;
+.user-photos {
+  flex-wrap: wrap;
+  padding: 15px 25px 15px 25px;
 }
 
-.App-intro {
-  font-size: large;
+.user-bio-photo {
+  padding: 15px;
+  height: 200px;
+  width: auto;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.user-photo {
+  padding: 15px;
+  min-width: 250px;
+  width: 25%;
+}
+
+.user-info {
+  display: flex;  
+  flex-flow: row;
+  padding: 15px 50px 15px 50px;
+  text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+  .user-info {
+  display: flex;  
+  flex-flow: row wrap;
+  padding: 15px;
+  align-items: center;
+  }
+  .user-bio-photo {
+    padding: 15px;
+    max-width: 200px;
+    width: 60%;
+    height: auto;
+  }
+}
+
+.user-item {
+  padding: 15px;
+  /*flex-flow: row;*/
 }

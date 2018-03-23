@@ -42,7 +42,7 @@ class Home extends React.Component {
         <Route exact path="/home" component={this.renderFeed} />
         <Route exact path="/profile/:username" component={Profile} />
         <Route exact path="/profile/edit" component={EditProfile} />
-        <Route exact path="/photos/new" user={user} component={NewPost} />
+        <Route exact path="/photos/new" render={(props) => <NewPost logOut={logOut} user={user} {...props} />} />
       </div>
     );
   }
