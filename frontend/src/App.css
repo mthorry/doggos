@@ -12,7 +12,13 @@ html {
 
 .user-photos {
   flex-wrap: wrap;
-  padding: 15px 25px 15px 25px;
+  /*padding: 15px 25px 15px 25px;*/
+}
+
+.user-heading {
+  display: flex;
+  text-align: center;
+  justify-content: space-around;
 }
 
 .user-bio-photo {
@@ -34,6 +40,30 @@ html {
   text-align: center;
 }
 
+.feed-photo > img {
+  width: 400px;
+}
+
+.photo-likes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-likes > p > button {
+  margin: 0px 15px 0px 15px;
+}
+
+.photo-top {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.photo-top-item {
+  margin: 20px 15px 10px 15px;
+}
+
 @media screen and (max-width: 600px) {
   .user-info {
   display: flex;  
@@ -44,6 +74,11 @@ html {
   .user-bio-photo {
     padding: 15px;
     max-width: 200px;
+    width: 60%;
+    height: auto;
+  }
+  .feed-photo > img {
+    min-width: 250px;
     width: 60%;
     height: auto;
   }
