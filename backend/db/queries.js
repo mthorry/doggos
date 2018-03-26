@@ -39,8 +39,8 @@ function getSinglePhoto(req, res, next) {
 
 function createPhoto(req, res, next) {
   let user_id = parseInt(req.user.id)
-  db.none('INSERT INTO photos(caption, url, user_id, username) VALUES ($1, $2, $3, $4)', 
-    [req.body.caption, req.body.url, user_id, req.params.username])
+  db.none('INSERT INTO photos(caption, url, user_id, username, date_created) VALUES ($1, $2, $3, $4, $5)', 
+    [req.body.caption, req.body.url, user_id, req.params.username, req.body.date_created])
     .then( function() {
       res.status(200)
         .json({
