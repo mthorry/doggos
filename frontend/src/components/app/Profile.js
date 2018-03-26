@@ -1,7 +1,8 @@
 import React from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 import Modal from 'react-modal';
+import Photo from "./Photo";
 const moment = require('moment');
 
 
@@ -14,7 +15,9 @@ class Profile extends React.Component {
 		following: '',
 		followed: false,
 		followerModalIsOpen: false,
-		followingModalIsOpen: false
+		followingModalIsOpen: false,
+		photoModalIsOpen: false,
+		photoForModal: ''
 	}
 
 	componentWillMount() {
@@ -137,30 +140,57 @@ class Profile extends React.Component {
 		this.setState({ followingModalIsOpen: !this.state.followingModalIsOpen })
 	}
 
+	handleShowPhoto = (e) => {
+		let {photos} = this.state
+		let photo 
+		if (photos.length) {
+			photo = photos.filter( photo => photo.id == e.target.id)
+		}
+		this.setState({ 
+			photoModalIsOpen: true,
+			photoForModal: photo
+		})
+	}
+
+	handleHidePhoto = () => {
+		this.setState({ 
+			photoModalIsOpen: false,
+			photoForModal: ''
+		})
+	}
+	// handleImageClick = (e) => {
+	// 	let {photos} = this.state
+	// 	let photo 
+	// 	if (photos.length) {
+	// 		photo = photos.filter( photo => photo.id == e.target.id)
+	// 	}
+	// 	console.log("CLICK", photo)
+	// }
+
 	render() {
 		this.checkReload()
-		const {photos, user, followers, following, followed} = this.state
+		const {photos, user, followers, following, followed, photo} = this.state
 
 		let userFollowers 
 		if (followers.length) { 
 			userFollowers = followers.map( follower => {
-			return <li key={follower.follower_username}><a href={`/profile/${follower.follower_username}`}>{follower.follower_username}</a></li>
+			return <li key={follower.follower_username} onClick={this.handleShowFollowers}><Link to={`/profile/${follower.follower_username}` }>{follower.follower_username}</Link></li>
 			})
 		}
 
 		let userFollowing 
 		if (following.length) { 
 			userFollowing = following.map( follow => {
-			return <li key={follow.followed_username}><a href={`/profile/${follow.followed_username}`}>{follow.followed_username}</a></li>
+			return <li key={follow.followed_username} onClick={this.handleShowFollowing}><Link to={`/profile/${follow.followed_username}`}>{follow.followed_username}</Link></li>
 			})
 		}
 
 		let userPhotos
 		if (photos.length > 0) {
 			userPhotos = photos.map( photo => {
-			return <img key={photo.id} className='user-photo' src={photo.url} alt={photo.caption} width='250px'></img>
+			return <img key={photo.id} id={photo.id} className='user-photo' src={photo.url} alt={photo.caption} width='250px' onClick={this.handleShowPhoto}></img>
 			})
-		} else { userPhotos = <p>This user has no photos yet. Mlem.</p> } 
+		} else { userPhotos = <p>This user has no photos yet 😐 Mlem.</p> }
 		
 		return(
 			<div>
@@ -184,7 +214,7 @@ class Profile extends React.Component {
            			<p><strong>Followers</strong></p>
            			{userFollowers}
            			<br/>
-          			<button onClick={this.handleShowFollowers}>Close Modal</button>
+          			<button onClick={this.handleShowFollowers}>Close</button>
 				</Modal>
 				<Modal
 					isOpen={this.state.followingModalIsOpen}
@@ -195,8 +225,19 @@ class Profile extends React.Component {
            			<p><strong>Following</strong></p>
            			{userFollowing}
            			<br/>
-          			<button onClick={this.handleShowFollowing}>Close Modal</button>
+          			<button onClick={this.handleShowFollowing}>Close</button>
 				</Modal>
+
+				<Modal
+					isOpen={this.state.photoModalIsOpen}
+           			contentLabel="onRequestClose Example"
+           			onRequestClose={this.handleShowPhoto}
+           			shouldCloseOnOverlayClick={true}
+				>
+
+          		<button onClick={this.handleHidePhoto}>Close</button>
+				</Modal>
+
 			</div>
 		)
 	}
