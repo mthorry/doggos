@@ -41,7 +41,7 @@ class Home extends React.Component {
         <Route path='/' component={this.renderNavBar} />
         <Route exact path="/home" component={this.renderFeed} />
         <Route exact path="/profile/:username" render={(props) => <Profile logOut={logOut} user={user} {...props} />} />
-        <Route exact path="/profile/edit" component={EditProfile} />
+        <Route exact path="/profile/user/edit" render={(props) => <EditProfile logOut={logOut} user={user} {...props} />} />
         <Route exact path="/photos/new" render={(props) => <NewPost logOut={logOut} user={user} {...props} />} />
       </div>
     );

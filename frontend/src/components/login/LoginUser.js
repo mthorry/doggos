@@ -36,7 +36,6 @@ class LoginUser extends React.Component {
         password: password
       })
       .then(res => {
-        console.log(res.data)
         this.props.user(res.data);
         this.props.active();
         this.setState({

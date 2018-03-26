@@ -10,10 +10,10 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
   res.json(req.user);
 })
 router.get('/logout',loginRequired, db.logoutUser)
-router.put('/edit', loginRequired, db.editUser)
 
 // User info
 router.get('/getUser', loginRequired, db.getUser)
 router.get('/getSingleUser/:username', db.getSingleUser)
+router.put('/edit', loginRequired, db.editUser)
 
 module.exports = router;
