@@ -147,9 +147,13 @@ class Profile extends React.Component {
 			photo = photos.filter( photo => photo.id == e.target.id)
 		}
 		this.setState({ 
-			photoModalIsOpen: true,
 			photoForModal: photo
-		})
+		}, this.setPhotoTrue())
+	}
+
+	setPhotoTrue = () => {
+		this.setState({ photoModalIsOpen: true })
+		console.log(this.state)
 	}
 
 	handleHidePhoto = () => {
@@ -169,7 +173,7 @@ class Profile extends React.Component {
 
 	render() {
 		this.checkReload()
-		const {photos, user, followers, following, followed, photo} = this.state
+		const {photos, user, followers, following, followed, photo, photoForModal} = this.state
 
 		let userFollowers 
 		if (followers.length) { 
@@ -186,9 +190,9 @@ class Profile extends React.Component {
 		}
 
 		let userPhotos
-		if (photos.length > 0) {
+		if (photos.length > 0 && user) {
 			userPhotos = photos.map( photo => {
-			return <img key={photo.id} id={photo.id} className='user-photo' src={photo.url} alt={photo.caption} width='250px' onClick={this.handleShowPhoto}></img>
+			return <Photo photo={photo} user={user} handleShowPhoto={this.handleShowPhoto} handleHidePhoto={this.handleHidePhoto} isOpen={this.state.photoModalIsOpen}/>
 			})
 		} else { userPhotos = <p>This user has no photos yet 😐 Mlem.</p> }
 		
@@ -216,6 +220,7 @@ class Profile extends React.Component {
            			<br/>
           			<button onClick={this.handleShowFollowers}>Close</button>
 				</Modal>
+
 				<Modal
 					isOpen={this.state.followingModalIsOpen}
            			contentLabel="onRequestClose Example"
@@ -228,15 +233,6 @@ class Profile extends React.Component {
           			<button onClick={this.handleShowFollowing}>Close</button>
 				</Modal>
 
-				<Modal
-					isOpen={this.state.photoModalIsOpen}
-           			contentLabel="onRequestClose Example"
-           			onRequestClose={this.handleShowPhoto}
-           			shouldCloseOnOverlayClick={true}
-				>
-
-          		<button onClick={this.handleHidePhoto}>Close</button>
-				</Modal>
 
 			</div>
 		)
@@ -245,3 +241,4 @@ class Profile extends React.Component {
 }
 
 export default Profile
+

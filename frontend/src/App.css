@@ -11,8 +11,15 @@ html {
 }
 
 .user-photos {
+  display: flex;
   flex-wrap: wrap;
-  /*padding: 15px 25px 15px 25px;*/
+  justify-content: center;
+}
+
+.user-photo {
+  padding: 15px;
+  min-width: 250px;
+  width: 25%;
 }
 
 .user-heading {
@@ -27,17 +34,12 @@ html {
   width: auto;
 }
 
-.user-photo {
-  padding: 15px;
-  min-width: 250px;
-  width: 25%;
-}
-
 .user-info {
   display: flex;  
   flex-flow: row;
   padding: 15px 50px 15px 50px;
   text-align: center;
+  justify-content: center;
 }
 
 .feed-photo > img {
