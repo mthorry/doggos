@@ -27,3 +27,6 @@ Built RESTful API with JavaScript, Express, Node.js, raw SQL queries and Passpor
 
 ### Upload Photo
 ![photo.gif](https://i.gyazo.com/9689a34ba1e5b648bf250c2c20274a25.gif)
+
+### Responsive
+![responsive.gif](https://i.gyazo.com/9d59fdcbedcffb94fab5e5c809e43aa7.gif)
