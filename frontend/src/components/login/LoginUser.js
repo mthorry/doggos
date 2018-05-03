@@ -94,7 +94,7 @@ class LoginUser extends React.Component {
         <div id="signup-box">
           <p>
             {" "}
-            Not a member? <Link to="/register"> Sign Up </Link>
+            Blorp! Not a member? <Link to="/register"> Do a Sign Up </Link>
           </p>
         </div>
       </div>
