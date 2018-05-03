@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS doggos;
-CREATE DATABASE doggos;
+-- DROP DATABASE IF EXISTS doggos;
+-- CREATE DATABASE doggos;
 
-\c doggos;
+-- \c doggos;
 
 CREATE TABLE users (
   ID SERIAL PRIMARY KEY,

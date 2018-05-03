@@ -1,7 +1,7 @@
 const promise = require('bluebird');
 const options = { promiseLib: promise };
 const pgp = require('pg-promise')(options);
-const connectionString = 'postgres://localhost:5432/doggos';
+const connectionString = process.env.DATABASE_URL;
 const db = pgp(connectionString);
 const authHelpers = require("../auth/helpers");
 const passport = require("../auth/local");
