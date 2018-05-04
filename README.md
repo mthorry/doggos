@@ -1,5 +1,5 @@
 # doggos
-A social photo app just for dog photos (because that’s why you’re really on Instagram).
+A social photo app just for dog photos (because that’s why you’re really on Instagram). 
 
 ## Installation
 1. Clone or Fork repo.
