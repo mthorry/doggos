@@ -79,7 +79,7 @@ class LoginUser extends React.Component {
           <br />
           <button className="button" onClick={this.handleSubmit}> Log in </button>
           <br />
-          <button className="button" onClick={this.handleDemo}>Demo Log in</button>
+          <button className="button" onClick={this.handleDemo}>CLICK HERE TO DEMO APP</button>
           <br />
             {" "}
           <strong>{ message }</strong>
