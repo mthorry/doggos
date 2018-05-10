@@ -13,7 +13,7 @@ class NewUser extends React.Component {
       password: "",
       message: "",
       profile_pic: ""
-      
+
     };
   }
 
@@ -36,7 +36,7 @@ class NewUser extends React.Component {
       })
     } else {
       axios
-        .post("/users/new", { 
+        .post("/users/new", {
           email: email,
           fullName: fullName,
           username: username,
@@ -69,9 +69,7 @@ class NewUser extends React.Component {
         <div id="register-box">
 
           <h1 id="app-name" > Doggos </h1>
-          <h4>Sign Up to share photos and videos of yourself-ish with your friends.</h4>
-          <button type="button" className="button"> <i className="fab fa-facebook-square"> </i> Log in with Facebook</button>
-          <p> ------------------ OR ------------------ </p>
+          <h4>Sign Up to share photos and videos of heckin cute puppers with your friends.</h4>
           <form onSubmit={this.handleSubmit}>
             <input
               className="input-box"
@@ -117,13 +115,12 @@ class NewUser extends React.Component {
 
             <input type="submit" value="Sign Up" className="button" />
           </form>
-          <p id="signup-agreement"> By signing up, you agree to our <br/> <strong> Terms &amp; Privacy Policy </strong></p>
 
           <br />
           {message}
         </div>
         <div id="login-box">
-          <p>Already a Self-ish member? <Link to="/login">Log in</Link></p>
+          <p>Bork! Already a pupper? <Link to="/login">Do a Log in</Link></p>
         </div>
       </div>
     );

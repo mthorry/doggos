@@ -83,12 +83,6 @@ class LoginUser extends React.Component {
           <br />
             {" "}
           <strong>{ message }</strong>
-          <p>
-            <Link id="forgot-link" to="/">
-              {" "}
-              Forgot Password?
-            </Link>
-          </p>
         </div>
 
         <div id="signup-box">
